@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class BusquedaBinaria {
     private List<Persona> personas;
 
     public BusquedaBinaria(List<Persona> personas) {
-        this.personas = personas;
+        this.personas = new ArrayList<>(personas);
     }
 
     public int findByName(String name) {
@@ -42,5 +43,22 @@ public class BusquedaBinaria {
 
         // No se encontro
         return -1;
+    }
+    public int findByAge(int age) {
+        // Ordenado por edad
+        personas.sort(Comparator.comparingInt(Persona::getAge));
+
+        int low = 0, high = personas.size() - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int midAge = personas.get(mid).getAge();
+            if (midAge == age) return mid;
+            if (midAge < age) low = mid + 1;
+            else high = mid - 1;
+        }
+        return -1;
+    }
+    public int findByPerson(){
+        
     }
 }
